@@ -1,0 +1,70 @@
+{
+  "fallback": "ask",
+  "primaryBrowser": "com.google.Chrome",
+  "onboarded": true,
+  "hiddenBrowsers": [
+    "com.googlecode.iterm2"
+  ],
+  "browserOrder": [
+    "com.apple.Safari",
+    "com.google.Chrome",
+    "org.chromium.Chromium"
+  ],
+  "rules": [
+    {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "",
+      "enabled": true,
+      "sourceApp": "com.hnc.Discord",
+      "matchKind": "domain",
+      "pattern": "",
+      "browser": "com.google.Chrome"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000002",
+      "name": "YouTube in Safari",
+      "enabled": true,
+      "matchKind": "domain",
+      "pattern": "youtube.com, youtu.be",
+      "browser": "com.apple.Safari"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000003",
+      "name": "Google Workspace",
+      "enabled": true,
+      "matchKind": "domain",
+      "pattern": "docs.google.com, meet.google.com, drive.google.com",
+      "browser": "com.google.Chrome"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000004",
+      "name": "GitHub from VS Code",
+      "enabled": true,
+      "sourceApp": "com.microsoft.VSCode",
+      "matchKind": "domain",
+      "pattern": "github.com",
+      "browser": "com.google.Chrome"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000005",
+      "name": "Jira",
+      "enabled": false,
+      "matchKind": "regex",
+      "pattern": "^https://[^/]+\\.atlassian\\.net/",
+      "browser": "com.google.Chrome"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000006",
+      "name": "figma.com",
+      "enabled": true,
+      "matchKind": "domain",
+      "pattern": "figma.com",
+      "browser": "com.apple.Safari"
+    }
+  ],
+  "language": "en",
+  "pickerModifiers": [
+    "option",
+    "command"
+  ]
+}
