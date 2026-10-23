@@ -15,14 +15,14 @@ final class LinkRouter {
         let config = store.config
         let force = forcePicker || ModifierKey.areHeld(config.pickerModifiers)
 
-        if !force,
-           let rule = Router.firstMatch(for: url, sourceApp: source?.bundleID, in: config.rules),
-           let browser = browsers.browser(withID: rule.browser) {
+        let rule = force ? nil : Router.firstMatch(for: url, sourceApp: source?.bundleID, in: config.rules)
+        if let rule, !rule.alwaysAsks, let browser = browsers.browser(withID: rule.browser) {
             open(url, in: browser, source: source, reason: .rule(RuleSummary.title(for: rule)))
             return
         }
 
-        if !force, config.fallback == .primary, let browser = browsers.browser(withID: config.primaryBrowser) {
+        // A matching "always ask" rule skips the fallback and goes straight to the picker.
+        if !force, rule?.alwaysAsks != true, config.fallback == .primary, let browser = browsers.browser(withID: config.primaryBrowser) {
             open(url, in: browser, source: source, reason: .primary)
             return
         }

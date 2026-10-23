@@ -74,9 +74,9 @@ public enum L10nKey: String, CaseIterable, Sendable {
     // Rule editor
     case editorName, editorNamePrompt, editorIf, editorLinkFrom, anyApp, chooseApp, editorAndURL, editorPattern
     case helpDomain, helpContains, helpRegex, invalidRegex
-    case editorThen, editorOpenWith, chooseBrowser, cancel, add, save, needCondition, openPanelPrompt
+    case editorThen, editorOpenWith, chooseBrowser, alwaysAsk, cancel, add, save, needCondition, openPanelPrompt
     // Rule tester
-    case testerPrompt, testerFrom, testerAnyApp, testerInvalidURL, testerRule, testerPrimary, testerPicker
+    case testerPrompt, testerFrom, testerAnyApp, testerInvalidURL, testerRule, testerAsk, testerPrimary, testerPicker
     // Browsers
     case browsersIntro, primaryBadge, refreshBrowsers
     // History
