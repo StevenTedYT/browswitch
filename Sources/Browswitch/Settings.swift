@@ -389,8 +389,14 @@ private struct RuleRow: View {
             }
             Spacer()
             Image(systemName: "arrow.right").foregroundStyle(.tertiary)
-            BrowserLabel(id: rule.browser)
-                .frame(minWidth: 140, alignment: .leading)
+            Group {
+                if rule.alwaysAsks {
+                    Label(L(.alwaysAsk), systemImage: "questionmark.circle")
+                } else {
+                    BrowserLabel(id: rule.browser)
+                }
+            }
+            .frame(minWidth: 140, alignment: .leading)
         }
         .padding(.vertical, 2)
         .opacity(rule.enabled ? 1 : 0.5)
@@ -488,6 +494,8 @@ struct RuleEditor: View {
                         if rule.browser.isEmpty {
                             Text(L(.chooseBrowser)).tag("")
                         }
+                        Label(L(.alwaysAsk), systemImage: "questionmark.circle").tag(Rule.askBrowser)
+                        Divider()
                         ForEach(browsers.ordered(includeHidden: true)) { browser in
                             AppMenuLabel(name: browser.name, icon: browser.icon).tag(browser.id)
                         }
@@ -581,6 +589,7 @@ private struct RuleTester: View {
         guard let url = URL(string: text), url.host != nil else { return L(.testerInvalidURL) }
 
         if let rule = Router.firstMatch(for: url, sourceApp: source.isEmpty ? nil : source, in: store.config.rules) {
+            if rule.alwaysAsks { return L(.testerAsk, RuleSummary.title(for: rule)) }
             let name = browsers.browser(withID: rule.browser)?.name ?? rule.browser
             return L(.testerRule, name, RuleSummary.title(for: rule))
         }

@@ -45,6 +45,14 @@ final class RouterTests: XCTestCase {
         XCTAssertFalse(Router.matches(both, url: url("https://twitch.tv"), sourceApp: discord))
     }
 
+    func testAlwaysAskRuleWinsOverLaterRules() {
+        let ask = Rule(pattern: "youtube.com", browser: Rule.askBrowser)
+        let fallback = Rule(sourceApp: discord, browser: chrome)
+        let match = Router.firstMatch(for: url("https://youtube.com"), sourceApp: discord, in: [ask, fallback])
+        XCTAssertEqual(match?.id, ask.id)
+        XCTAssertTrue(match?.alwaysAsks ?? false)
+    }
+
     func testContainsAndRegex() {
         let contains = Rule(matchKind: .contains, pattern: "meet", browser: chrome)
         XCTAssertTrue(Router.matches(contains, url: url("https://MEET.google.com/abc"), sourceApp: nil))

@@ -33,6 +33,7 @@ public struct Rule: Identifiable, Codable, Equatable, Hashable, Sendable {
     public var matchKind: MatchKind
     /// Empty = any URL.
     public var pattern: String
+    /// Bundle identifier of the browser, or `Rule.askBrowser` to show the picker.
     public var browser: String
 
     public init(
@@ -52,6 +53,11 @@ public struct Rule: Identifiable, Codable, Equatable, Hashable, Sendable {
         self.pattern = pattern
         self.browser = browser
     }
+
+    /// Value of `browser` for rules that always show the picker.
+    public static let askBrowser = "ask"
+
+    public var alwaysAsks: Bool { browser == Rule.askBrowser }
 
     public var hasSourceCondition: Bool { !(sourceApp ?? "").isEmpty }
 
